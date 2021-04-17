@@ -7,9 +7,40 @@ import re
 import sys
 
 
+def compare(arr1, arr2, id=0):
+    length = len(arr2)
+    for i in range(id, len(arr1)):
+        if length + i > len(arr1):
+            return -1
+        if arr1[i:length + i] == arr2:
+            return i
+
+
 # Complete the gridSearch function below.
 def gridSearch(G, P):
-    pass
+    pid = 0
+    prev_pid = 0
+    p_length = len(P)
+    got_str = "Got 'em"
+    sorry_str = "Sorry Niko :("
+
+    for arr in G:
+        if pid == p_length:
+            return got_str
+
+        if prev_pid != 0:
+            val = compare(arr, P[pid], prev_pid)
+        else:
+            val = compare(arr, P[pid])
+
+        if val >= 0:
+            if pid == 0:
+                prev_pid = val
+            if prev_pid != val:
+                return sorry_str
+            pid += 1
+
+    return sorry_str
 
 
 if __name__ == "__main__":

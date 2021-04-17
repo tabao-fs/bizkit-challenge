@@ -8,7 +8,21 @@ import sys
 
 # Complete the maxSubsetSum function below.
 def maxSubsetSum(arr):
-    pass
+    a = 0
+    b = 0
+
+    for value in arr:
+        if a > b:
+            tmp = a
+        else:
+            tmp = b
+        b = a + value
+        a = tmp
+
+    if a > b:
+        return a
+    else:
+        return b
 
 
 if __name__ == "__main__":
